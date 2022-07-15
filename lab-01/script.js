@@ -32,11 +32,14 @@ var App = /** @class */ (function () {
     App.prototype.computeData = function () {
         var sum = 0;
         this.inputArray.forEach(function (input) { return (sum += Number(input.value)); });
-        this.showData(sum);
+        var avg = sum / this.inputArray.length;
+        this.showData(sum, avg);
     };
-    App.prototype.showData = function (sum) {
+    App.prototype.showData = function (sum, avg) {
         var sumInput = document.getElementById('sum');
+        var avgInput = document.getElementById('avg');
         sumInput.textContent = sum;
+        avgInput.textContent = avg;
     };
     return App;
 }());

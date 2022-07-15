@@ -38,15 +38,16 @@ class App {
     computeData() {
         let sum = 0;
         this.inputArray.forEach((input) => (sum += Number(input.value)));
-
-
-
-        this.showData(sum);
+        let avg = sum / this.inputArray.length;
+        
+        this.showData(sum, avg);
     }
 
-    showData(sum) {
+    showData(sum, avg) {
         let sumInput = document.getElementById('sum') as HTMLInputElement;
+        let avgInput = document.getElementById('avg') as HTMLInputElement;
         sumInput.textContent = sum;
+        avgInput.textContent = avg;
     }
 
     
