@@ -33,13 +33,23 @@ var App = /** @class */ (function () {
         var sum = 0;
         this.inputArray.forEach(function (input) { return (sum += Number(input.value)); });
         var avg = sum / this.inputArray.length;
-        this.showData(sum, avg);
+        var minMaxArr = [];
+        this.inputArray.forEach(function (element) {
+            minMaxArr.push(Number(element.value));
+        });
+        var min = Math.min.apply(Math, minMaxArr);
+        var max = Math.max.apply(Math, minMaxArr);
+        this.showData(sum, avg, min, max);
     };
-    App.prototype.showData = function (sum, avg) {
+    App.prototype.showData = function (sum, avg, min, max) {
         var sumInput = document.getElementById('sum');
         var avgInput = document.getElementById('avg');
+        var minInput = document.getElementById('min');
+        var maxInput = document.getElementById('max');
         sumInput.textContent = sum;
         avgInput.textContent = avg;
+        minInput.textContent = min;
+        maxInput.textContent = max;
     };
     return App;
 }());

@@ -39,20 +39,28 @@ class App {
         let sum = 0;
         this.inputArray.forEach((input) => (sum += Number(input.value)));
         let avg = sum / this.inputArray.length;
+
+        let minMaxArr: number[] = [];
+        this.inputArray.forEach(element => {
+            minMaxArr.push(Number(element.value));
+        });
+
+        let min = Math.min(...minMaxArr);
+        let max = Math.max(...minMaxArr);
         
-        this.showData(sum, avg);
+        this.showData(sum, avg, min, max);
     }
 
-    showData(sum, avg) {
+    showData(sum, avg, min, max) {
         let sumInput = document.getElementById('sum') as HTMLInputElement;
-        let avgInput = document.getElementById('avg') as HTMLInputElement;
+        let avgInput = document.getElementById('avg') as HTMLInputElement;        
+        let minInput = document.getElementById('min') as HTMLInputElement;
+        let maxInput = document.getElementById('max') as HTMLInputElement;
         sumInput.textContent = sum;
         avgInput.textContent = avg;
+        minInput.textContent = min;
+        maxInput.textContent = max;
     }
-
-    
-
-
 }
 
 let app = new App();
