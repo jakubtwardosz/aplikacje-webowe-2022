@@ -1,19 +1,25 @@
 class App {
-    greeting: string;
-
-    constructor(message: string) {
-        this.greeting = message;
-
-        this.helloWorld();
+    
+    constructor() {
+        let inputs = document.getElementById('inputs');
+        let number;
+            // Optional Parameters
+            inputs?.addEventListener('change', (event) => {                
+                // Type Assertions
+                const target = event.target as HTMLInputElement;
+                number = Number(target.value);
+                
+                this.computeData(number);
+            });
     }
 
-    helloWorld(){
-        console.log("Hello world!");
-    }
-
-    greet() {
-        return "Hello, " + this.greeting;
-    }
+    computeData(number){
+        console.log(number);
+    }    
 }
 
-let app = new App("world");
+let app = new App();
+
+
+
+

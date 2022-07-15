@@ -1,1 +1,5 @@
 *.js
+!_*.js
+**/*.js
+**/!_*.js
+lab-01/script.js
