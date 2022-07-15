@@ -1,24 +1,36 @@
 var App = /** @class */ (function () {
     function App() {
         var _this = this;
-        this.sum = 0;
-        var inputs = document.getElementById('inputs');
-        var number;
+        var inputCounter = document.getElementById('input-counter');
+        var container = document.getElementById('inputs');
         // Optional Parameters
-        inputs === null || inputs === void 0 ? void 0 : inputs.addEventListener('change', function (event) {
+        inputCounter === null || inputCounter === void 0 ? void 0 : inputCounter.addEventListener('change', function (event) {
             // Type Assertions
             var target = event.target;
-            number = Number(target.value);
-            _this.computeData(number);
-            _this.showData(_this.sum);
+            var number = Number(target.value);
+            _this.createInputs(number, container);
         });
     }
-    App.prototype.showData = function (sum) {
-        var sumInput = document.getElementById('sum');
-        sumInput.textContent = sum;
+    App.prototype.createInputs = function (number, container) {
+        var _this = this;
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+            this.inputArray = [];
+        }
+        for (var index = 0; index < number.valueOf(); index++) {
+            var input = document.createElement('input');
+            input.type = 'number';
+            container.appendChild(input);
+            this.inputArray.push(input);
+        }
+        for (var i = 0; i < this.inputArray.length; i++) {
+            this.inputArray[i].addEventListener('change', function (event) {
+                _this.computeData();
+            });
+        }
     };
-    App.prototype.computeData = function (number) {
-        return this.sum += number;
+    App.prototype.computeData = function () {
+        console.log('Dzień dobry');
     };
     return App;
 }());

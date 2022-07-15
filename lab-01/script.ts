@@ -1,30 +1,52 @@
 class App {
-
-    sum: number = 0;
+    inputArray: HTMLInputElement[];
 
     constructor() {
-        let inputs = document.getElementById('inputs');        
-        let number;       
+        let inputCounter = document.getElementById('input-counter');
+        let container = document.getElementById('inputs');
 
         // Optional Parameters
-        inputs?.addEventListener('change', (event) => {
+        inputCounter?.addEventListener('change', (event) => {
             // Type Assertions
             const target = event.target as HTMLInputElement;
-            number = Number(target.value);
-            this.computeData(number);
-            this.showData(this.sum);
-        });
-    }
-    showData(sum) {
-        let sumInput = document.getElementById('sum') as HTMLInputElement;
-        sumInput.textContent = sum;
+            let number = Number(target.value);
+            this.createInputs(number, container);
+        });       
     }
 
-    computeData(number) {
-        return this.sum += number;
+    createInputs(number, container) {
+
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild);
+            this.inputArray = [];
+        }
+
+        for (let index = 0; index < number.valueOf(); index++) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            container.appendChild(input);
+            this.inputArray.push(input);
+        }
+
+        for (let i = 0; i < this.inputArray.length; i++) {
+            this.inputArray[i].addEventListener('change', (event) => {
+                this.computeData();
+            });            
+        }
     }
+
+    computeData() {
+        console.log('Dzień dobry');
+    }
+
+    // showData(sum) {
+    //     let sumInput = document.getElementById('sum') as HTMLInputElement;
+    //     sumInput.textContent = sum;
+    // }
 
     
+
+
 }
 
 let app = new App();
