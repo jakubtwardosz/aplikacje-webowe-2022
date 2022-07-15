@@ -30,7 +30,13 @@ var App = /** @class */ (function () {
         }
     };
     App.prototype.computeData = function () {
-        console.log('Dzień dobry');
+        var sum = 0;
+        this.inputArray.forEach(function (input) { return (sum += Number(input.value)); });
+        this.showData(sum);
+    };
+    App.prototype.showData = function (sum) {
+        var sumInput = document.getElementById('sum');
+        sumInput.textContent = sum;
     };
     return App;
 }());

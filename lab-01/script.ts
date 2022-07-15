@@ -36,13 +36,18 @@ class App {
     }
 
     computeData() {
-        console.log('Dzień dobry');
+        let sum = 0;
+        this.inputArray.forEach((input) => (sum += Number(input.value)));
+
+
+
+        this.showData(sum);
     }
 
-    // showData(sum) {
-    //     let sumInput = document.getElementById('sum') as HTMLInputElement;
-    //     sumInput.textContent = sum;
-    // }
+    showData(sum) {
+        let sumInput = document.getElementById('sum') as HTMLInputElement;
+        sumInput.textContent = sum;
+    }
 
     
 
