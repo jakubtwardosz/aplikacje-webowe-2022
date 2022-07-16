@@ -1,37 +1,56 @@
 class App {
+    boom: HTMLAudioElement;
+    clap: HTMLAudioElement;
+    hihat: HTMLAudioElement;
+    kick: HTMLAudioElement;
+    openhat: HTMLAudioElement;
+    ride: HTMLAudioElement;
+    snare: HTMLAudioElement;
+    tink: HTMLAudioElement;
+    tom: HTMLAudioElement;
 
     constructor() {
         document.addEventListener('keypress', this.play);
     }
 
     play(event: KeyboardEvent) {
+        this.boom = document.querySelector('[data-sound="boom"]') as HTMLAudioElement;
+        this.clap = document.querySelector('[data-sound="clap"]') as HTMLAudioElement;
+        this.hihat = document.querySelector('[data-sound="hihat"]') as HTMLAudioElement;
+        this.kick = document.querySelector('[data-sound="kick"]') as HTMLAudioElement;
+        this.openhat = document.querySelector('[data-sound="openhat"]') as HTMLAudioElement;
+        this.ride = document.querySelector('[data-sound="ride"]') as HTMLAudioElement;
+        this.snare = document.querySelector('[data-sound="snare"]') as HTMLAudioElement;
+        this.tink = document.querySelector('[data-sound="tink"]') as HTMLAudioElement;
+        this.tom = document.querySelector('[data-sound="tom"]') as HTMLAudioElement;
+
         switch (event.key) {
             case 'q':
-                console.log(event.key);
+                this.boom.play();
                 break;
             case 'w':
-                console.log(event.key);
+                this.clap.play();
                 break;
             case 'e':
-                console.log(event.key);
+                this.hihat.play();
                 break;
             case 'r':
-                console.log(event.key);
+                this.kick.play();
                 break;
             case 't':
-                console.log(event.key);
+                this.openhat.play();
                 break;
             case 'a':
-                console.log(event.key);
+                this.ride.play();
                 break;
             case 's':
-                console.log(event.key);
+                this.snare.play();
                 break;
             case 'd':
-                console.log(event.key);
+                this.tink.play();
                 break;
             case 'f':
-                console.log(event.key);
+                this.tom.play();
                 break;
         }
     }
