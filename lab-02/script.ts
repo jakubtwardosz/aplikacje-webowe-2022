@@ -8,6 +8,7 @@ class App {
     snare: HTMLAudioElement;
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
+    // Problem
     channels: Array<Array<[number, string]>> = new Array<Array<[number, string]>>;
     currentChannel : number = -1;
     key : string;
@@ -43,12 +44,10 @@ class App {
 
     record(key, time, currentChannel){
        
-        if (currentChannel == 0) { 
+        if (currentChannel == 0) {
+            // Problem 
             this.channels.push(currentChannel);
-            this.channels[currentChannel].push(key,time);
-           
-                       
-            
+            this.channels['currentChannel'].push(key,time);
             console.log(this.channels);          
         }
         if (currentChannel == 1) {
