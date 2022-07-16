@@ -8,55 +8,62 @@ class App {
     snare: HTMLAudioElement;
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
-    channelArr1: Array<[string, number]> = [];
-    channelArr2: Array<[string, number]> = [];
-    channelArr3: Array<[string, number]> = [];
-    channelArr4: Array<[string, number]> = [];
-    arr: Array<[string, number]> = [];
-    channel : number = 0;    
+    channels: Array<Array<[number, string]>> = new Array<Array<[number, string]>>;
+    currentChannel : number = -1;
+    key : string;
+    time : number;
+    flag : boolean = false;
 
     constructor() {
         document.addEventListener('keypress', (event : KeyboardEvent) => {
-            let key = event.key;
-            let time = event.timeStamp;                        
-            this.record([key, time], this.channel);                     
-            this.play(key);           
+            this.key = event.key;
+            this.time = event.timeStamp;                        
+            this.record(this.key, this.time, this.currentChannel);                  
+            this.play(this.key);           
         });
 
-        for (let i = 1; i < 5; i++) {
+        for (let i = 0; i < 4; i++) {
             let playChannel = document.querySelector("#playChannel" + i);
             let recordChannel = document.querySelector("#recordChannel" + i);
 
-            playChannel?.addEventListener("click", () => console.log('Hello' + i));
-            recordChannel?.addEventListener("click", () => {
-                this.channel = i;
-            });            
-        }
-       
+                playChannel?.addEventListener("click", () => {
+                    //cuttentChannel.forEach((sound) => {setTimeout(() => this.play(sound[0]), sound[1]); })
+                });
+
+                recordChannel?.addEventListener('click', () => {
+                    this.time = 0;
+                    this.currentChannel = i;
+                    this.flag = !this.flag;
+                    if (this.flag === false){
+                        this.currentChannel = -1;
+                    }
+                });          
+        }       
     }
 
-    record(arr: [string, number], channel){
-        console.log(arr, channel);
-        if (channel === 1)
-        {
-            this.channelArr1.push(arr);
-            console.log(arr);
+    record(key, time, currentChannel){
+       
+        if (currentChannel == 0) { 
+            this.channels.push(currentChannel);
+            this.channels[currentChannel].push(key,time);
+           
+                       
+            
+            console.log(this.channels);          
         }
-        if (channel === 2)
-        {
-            this.channelArr2.push(arr);
-            console.log('2');
+        if (currentChannel == 1) {
+            this.channels[currentChannel].push(key,time);
+            console.log(this.currentChannel);           
         }
-        if (channel === 3)
-        {
-            this.channelArr3.push(arr);
-            console.log('3');
+        if (currentChannel == 2) {
+            this.channels[currentChannel].push(key,time);
+            console.log(this.currentChannel);           
         }
-        if (channel === 4)
-        {
-            this.channelArr4.push(arr);
-            console.log('4');
-        }        
+        if (currentChannel == 3) {
+            this.channels[currentChannel].push(key,time);
+            console.log(this.currentChannel);           
+        }
+              
     }
 
     play(key) {
