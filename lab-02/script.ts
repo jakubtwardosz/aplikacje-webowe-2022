@@ -8,21 +8,55 @@ class App {
     snare: HTMLAudioElement;
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
-    channel: any = [];
+    channelArr1: Array<[string, number]> = [];
+    channelArr2: Array<[string, number]> = [];
+    channelArr3: Array<[string, number]> = [];
+    channelArr4: Array<[string, number]> = [];
+    arr: Array<[string, number]> = [];
+    channel : number = 0;    
 
     constructor() {
         document.addEventListener('keypress', (event : KeyboardEvent) => {
-            let arr: any = [];
             let key = event.key;
-            let time = event.timeStamp;
-            arr.push(key, time);
-            this.channels(arr);
+            let time = event.timeStamp;                        
+            this.record([key, time], this.channel);                     
             this.play(key);           
-        });   
+        });
+
+        for (let i = 1; i < 5; i++) {
+            let playChannel = document.querySelector("#playChannel" + i);
+            let recordChannel = document.querySelector("#recordChannel" + i);
+
+            playChannel?.addEventListener("click", () => console.log('Hello' + i));
+            recordChannel?.addEventListener("click", () => {
+                this.channel = i;
+            });            
+        }
+       
     }
 
-    channels(arr){
-        console.log(arr);
+    record(arr: [string, number], channel){
+        console.log(arr, channel);
+        if (channel === 1)
+        {
+            this.channelArr1.push(arr);
+            console.log(arr);
+        }
+        if (channel === 2)
+        {
+            this.channelArr2.push(arr);
+            console.log('2');
+        }
+        if (channel === 3)
+        {
+            this.channelArr3.push(arr);
+            console.log('3');
+        }
+        if (channel === 4)
+        {
+            this.channelArr4.push(arr);
+            console.log('4');
+        }        
     }
 
     play(key) {
