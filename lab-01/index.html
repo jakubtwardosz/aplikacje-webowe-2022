@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Lab-01</title>
 </head>
 <body>
     <p>Ile inputów wygenerować?</p>
     <input type="number" id="input-counter">
 
-    <div id="inputs">
+    <div id="inputs" class="container">
     </div>
 
-    <p>Suma: <span id="sum"></span></p>
-    <p>Średnia: <span id="avg"></span></p>
-    <p>Minimum: <span id="min"></span></p>
-    <p>Maximum: <span id="max"></span></p>
+    <div class="container"><b>Suma:</b><p id="sum" class="result"></p><div class="loader"></div></div>
+    <div class="container"><b>Średnia:</b><p id="avg" class="result"></p><div class="loader"></div></div>
+    <div class="container"><b>Minimum:</b><p id="min" class="result"></p><div class="loader"></div></div>
+    <div class="container"><b>Maximum:</b><p id="max" class="result"></p><div class="loader"></div></div>
     <script src="script.js"></script>
 </body>
 </html>

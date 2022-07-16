@@ -27,6 +27,36 @@ var App = /** @class */ (function () {
             this.inputArray[i].addEventListener('change', function (event) {
                 _this.computeData();
             });
+            this.inputArray[i].addEventListener('focus', function (event) {
+                _this.displayLoading();
+            });
+            this.inputArray[i].addEventListener('blur', function (event) {
+                _this.hideLoading();
+            });
+        }
+    };
+    App.prototype.displayLoading = function () {
+        this.loaders = document.getElementsByClassName('loader');
+        var results = document.getElementsByClassName('result');
+        for (var i = 0; i < this.loaders.length; i++) {
+            var loader = this.loaders[i];
+            loader.style.display = 'block';
+        }
+        for (var i = 0; i < results.length; i++) {
+            var result = results[i];
+            result.style.display = 'none';
+        }
+    };
+    App.prototype.hideLoading = function () {
+        var loaders = document.getElementsByClassName('loader');
+        var results = document.getElementsByClassName('result');
+        for (var i = 0; i < loaders.length; i++) {
+            var loader = loaders[i];
+            loader.style.display = 'none';
+        }
+        for (var i = 0; i < results.length; i++) {
+            var result = results[i];
+            result.style.display = 'block';
         }
     };
     App.prototype.computeData = function () {

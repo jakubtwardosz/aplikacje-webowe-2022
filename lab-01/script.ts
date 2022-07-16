@@ -1,5 +1,6 @@
 class App {
     inputArray: HTMLInputElement[];
+    loaders : HTMLCollection;
 
     constructor() {
         let inputCounter = document.getElementById('input-counter');
@@ -30,8 +31,44 @@ class App {
 
         for (let i = 0; i < this.inputArray.length; i++) {
             this.inputArray[i].addEventListener('change', (event) => {
-                this.computeData();
-            });            
+                this.computeData();                
+            });
+            this.inputArray[i].addEventListener('focus', (event) => {
+                this.displayLoading();
+            });
+            this.inputArray[i].addEventListener('blur', (event) => {
+                this.hideLoading();
+            });
+        }
+    }
+
+    displayLoading(){
+        this.loaders = document.getElementsByClassName('loader');
+        let results = document.getElementsByClassName('result');
+
+        for (let i = 0; i < this.loaders.length; i++) {
+            let loader = this.loaders[i] as HTMLElement;
+            loader.style.display = 'block';
+        }
+
+        for (let i = 0; i < results.length; i++) {
+            let result = results[i] as HTMLElement;
+            result.style.display = 'none';
+        }  
+    }
+
+    hideLoading(){     
+        let loaders = document.getElementsByClassName('loader');        
+        let results = document.getElementsByClassName('result');
+
+        for (let i = 0; i < loaders.length; i++) {
+            let loader = loaders[i] as HTMLElement;
+            loader.style.display = 'none';
+        }
+
+        for (let i = 0; i < results.length; i++) {
+            let result = results[i] as HTMLElement;
+            result.style.display = 'block';
         }
     }
 
@@ -52,10 +89,10 @@ class App {
     }
 
     showData(sum, avg, min, max) {
-        let sumInput = document.getElementById('sum') as HTMLInputElement;
-        let avgInput = document.getElementById('avg') as HTMLInputElement;        
-        let minInput = document.getElementById('min') as HTMLInputElement;
-        let maxInput = document.getElementById('max') as HTMLInputElement;
+        let sumInput = document.getElementById('sum') as HTMLElement;
+        let avgInput = document.getElementById('avg') as HTMLElement;        
+        let minInput = document.getElementById('min') as HTMLElement;
+        let maxInput = document.getElementById('max') as HTMLElement;
         sumInput.textContent = sum;
         avgInput.textContent = avg;
         minInput.textContent = min;
