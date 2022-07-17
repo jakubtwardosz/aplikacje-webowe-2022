@@ -8,66 +8,86 @@ class App {
     snare: HTMLAudioElement;
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
-    // Problem
-    channels: Array<Array<[number, string]>>;
+    channels: Array<Array<[number, string]>>; 
     currentChannel : number = -1;
     key : string;
     time : number;
     flag : boolean = false;
 
     constructor() {
+        this.channels = [];   
+
+
         document.addEventListener('keypress', (event : KeyboardEvent) => {
-            this.channels = new Array<Array<[number, string]>>;
+                                 
             this.key = event.key;
             this.time = event.timeStamp;                        
             this.record(this.key, this.time, this.currentChannel);                  
-            this.play(this.key);           
+            this.play(this.key);
+            console.log(this.channels);          
         });
 
         for (let i = 0; i < 4; i++) {
             let playChannel = document.querySelector("#playChannel" + i);
             let recordChannel = document.querySelector("#recordChannel" + i);
-
-                playChannel?.addEventListener("click", () => {
-                    //cuttentChannel.forEach((sound) => {setTimeout(() => this.play(sound[0]), sound[1]); })
-                });
+                          
 
                 recordChannel?.addEventListener('click', () => {
-                    this.time = 0;
-                    this.currentChannel = i;
+                    //this.time = 0;
+                    this.currentChannel = i; 
+                    
+                    // Reset channels
+                    // if (this.channels[this.currentChannel]) {
+                    //     this.channels[this.currentChannel] = [];
+                    // } 
+                    
+                    recordChannel.textContent = "Stop recording channel " + i;
+                    
                     this.flag = !this.flag;
                     if (this.flag === false){
-                        this.currentChannel = -1;
+                        recordChannel.textContent = "Start recording channel " +i;
                     }
-                });          
+                });
+                
+                playChannel?.addEventListener("click", () => {
+                    this.currentChannel = i; 
+                    //this.time = 0; 
+                    this.channels[i].forEach((sound) => {
+                        setTimeout(() => this.play(sound[0]), Number(sound[1])); 
+                    })
+                });
         }       
     }
 
     record(key, time, currentChannel){
-
-        
-        //this.channels['currentChannel'].push([key,time]);
-        // if (currentChannel == 0) {
-        //     // Problem 
-        //     this.channels.push(currentChannel);
-        //     //this.channels['currentChannel'].push([key,time]);
-        //     console.log(this.channels.cu);          
-        // }
+        if (currentChannel == 0) {
+            if (!this.channels[this.currentChannel]) {
+                this.channels[this.currentChannel] = [];            
+            }
+            this.channels[currentChannel].push([key,time]);
+          
+        }
         if (currentChannel == 1) {
-            this.channels = [currentChannel];   
-            console.log(this.channels);
-            //this.channels[currentChannel].push(key,time);
-            console.log(this.channels);           
+            if (!this.channels[this.currentChannel]) {
+                this.channels[this.currentChannel] = [];            
+            }
+            this.channels[currentChannel].push([key,time]);
+ 
         }
         if (currentChannel == 2) {
-            this.channels[currentChannel].push(key,time);
-            console.log(this.currentChannel);           
+            if (!this.channels[this.currentChannel]) {
+                this.channels[this.currentChannel] = [];            
+            }
+            this.channels[currentChannel].push([key,time]);
+
         }
         if (currentChannel == 3) {
-            this.channels[currentChannel].push(key,time);
-            console.log(this.currentChannel);           
-        }
-              
+            if (!this.channels[this.currentChannel]) {
+                this.channels[this.currentChannel] = [];            
+            }
+            this.channels[currentChannel].push([key,time]);
+
+        }              
     }
 
     play(key) {
