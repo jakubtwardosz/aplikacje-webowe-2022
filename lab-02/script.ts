@@ -9,7 +9,7 @@ class App {
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
     // Problem
-    channels: Array<Array<[number, string]>> = new Array<Array<[number, string]>>;
+    channels: Array<Array<[number, string]>>;
     currentChannel : number = -1;
     key : string;
     time : number;
@@ -17,6 +17,7 @@ class App {
 
     constructor() {
         document.addEventListener('keypress', (event : KeyboardEvent) => {
+            this.channels = new Array<Array<[number, string]>>;
             this.key = event.key;
             this.time = event.timeStamp;                        
             this.record(this.key, this.time, this.currentChannel);                  
@@ -43,16 +44,20 @@ class App {
     }
 
     record(key, time, currentChannel){
-       
-        if (currentChannel == 0) {
-            // Problem 
-            this.channels.push(currentChannel);
-            this.channels['currentChannel'].push(key,time);
-            console.log(this.channels);          
-        }
+
+        
+        //this.channels['currentChannel'].push([key,time]);
+        // if (currentChannel == 0) {
+        //     // Problem 
+        //     this.channels.push(currentChannel);
+        //     //this.channels['currentChannel'].push([key,time]);
+        //     console.log(this.channels.cu);          
+        // }
         if (currentChannel == 1) {
-            this.channels[currentChannel].push(key,time);
-            console.log(this.currentChannel);           
+            this.channels = [currentChannel];   
+            console.log(this.channels);
+            //this.channels[currentChannel].push(key,time);
+            console.log(this.channels);           
         }
         if (currentChannel == 2) {
             this.channels[currentChannel].push(key,time);
