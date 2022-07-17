@@ -1,5 +1,10 @@
-*.js
-!_*.js
-**/*.js
-**/!_*.js
-lab-01/script.js
+/lab-01/script.js
+/lab-02/script.js
+**/dist
+
+
+**/node_modules
+**/package-lock.json
+*.log
+.vscode
+
