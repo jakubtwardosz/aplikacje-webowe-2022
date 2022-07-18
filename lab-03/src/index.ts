@@ -8,8 +8,9 @@ const weatherView = new WeatherView();
 class Main {
   constructor() {
     let city = document.getElementById('city') as HTMLInputElement;
-    let button = document.getElementById('button');    
-    button.addEventListener('click', () => {
+    let button = document.getElementById('form');    
+    button.addEventListener('submit', (event) => {
+      event.preventDefault();
       if(city.value){
         weatherView.displayWeather(weatherService.getWeather(city.value))
       }

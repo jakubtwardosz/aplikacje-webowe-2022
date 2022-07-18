@@ -2,7 +2,8 @@ export class WeatherView {
     constructor() {
     }
     displayWeather(city : Promise<string>){
-        console.log(city);
-
+        city.then((data : any) =>{
+            console.log(data);
+        });
     }
 }
