@@ -8,14 +8,12 @@ class App {
     snare: HTMLAudioElement;
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
-    channels: Array<Array<[number, string]>> = []; 
+    channels: Array<Array<[string, number]>> = []; 
     currentChannel : number = -1;
     key : string;
     time : number = 0;
     flag : boolean = false;
     startTime : any;
-    endTime : any;
-    timeDiff : any;
 
     constructor() {
 
@@ -36,59 +34,69 @@ class App {
                 recordChannel?.addEventListener('click', (event) => {
                     this.flag = !this.flag;                   
                     this.currentChannel = i;
-
-                    recordChannel.textContent = "Stop recording channel " + i;                    
+                    
+                    if(recordChannel){
+                        recordChannel.textContent = "Stop recording channel " + i;   
+                    }
+                                     
                     if(this.flag === true)
                     {                        
                         this.startTime= Number(event.timeStamp);
-                        console.log(this.startTime);
-                        
                     }                    
                     if (this.flag === false){
-                        this.endTime = Number(event.timeStamp);
-                        this.timeDiff = this.endTime - this.startTime;                        
-                        console.log(this.endTime, this.timeDiff);
-                        recordChannel.textContent = "Start recording channel " +i;
+                        if(recordChannel){                       
+                            recordChannel.textContent = "Start recording channel " +i;
+                        }
                     }                   
                 });
                 
                 playChannel?.addEventListener("click", () => {
-                    this.currentChannel = i; 
-                    this.channels[i].forEach((sound) => {
-                        setTimeout(() => this.play(sound[0]), Number(sound[1])); 
-                    })
+                    this.currentChannel = i;
+                    if(this.channels[i]){
+                        this.channels[i].forEach((sound) => {
+                            setTimeout(() => this.play(sound[0]), Number(sound[1])); 
+                        })
+
+                    }                   
+                    
                 });
-        }       
+        }
+
+        let playAllChannels = document.querySelector("#playAllChannels");
+
+        playAllChannels?.addEventListener('click', (event) => {
+            this.channels.forEach((channel) => {
+                channel.forEach((sound) => {
+                    setTimeout(() => this.play(sound[0]), Number(sound[1])); 
+                }) 
+            });
+        });        
     }
 
     record(key, time, currentChannel){
         if (currentChannel == 0) {
             if (!this.channels[this.currentChannel]) {
-                this.channels[this.currentChannel] = [];            
-            }
-            this.channels[currentChannel].push([key,time]);
-          
+                this.channels[this.currentChannel] = [];          
+            }            
+            this.channels[currentChannel].push([key, Number(time - this.startTime)]);
         }
         if (currentChannel == 1) {
             if (!this.channels[this.currentChannel]) {
                 this.channels[this.currentChannel] = [];            
             }
-            this.channels[currentChannel].push([key,time]);
- 
+            this.channels[currentChannel].push([key, Number(time - this.startTime)]);
         }
         if (currentChannel == 2) {
             if (!this.channels[this.currentChannel]) {
                 this.channels[this.currentChannel] = [];            
             }
-            this.channels[currentChannel].push([key,time]);
-
+            this.channels[currentChannel].push([key, Number(time - this.startTime)]);
         }
         if (currentChannel == 3) {
             if (!this.channels[this.currentChannel]) {
                 this.channels[this.currentChannel] = [];            
             }
-            this.channels[currentChannel].push([key,time]);
-
+            this.channels[currentChannel].push([key, Number(time - this.startTime)]);
         }              
     }
 
