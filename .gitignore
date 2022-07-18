@@ -1,8 +1,7 @@
 /lab-01/script.js
 /lab-02/script.js
-**/dist
-
-
+**/dist/*.js
+**/dist/*.txt
 **/node_modules
 **/package-lock.json
 *.log
