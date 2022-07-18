@@ -1,0 +1,75 @@
+/* #ffa62e, #ea4d2c, #000000, #14213D, #FFFFFF */
+@import 'https://fonts.googleapis.com/css?family=Roboto';
+
+html,
+body {
+    background: linear-gradient(to bottom, #FFA62E, #EA4D2C);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+.drumkit {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.pad {
+    width: 90px;
+    height: 90px;
+    margin: 10px;
+    transition: all .07s ease;
+
+    box-shadow: 0 8px 6px -6px #14213D;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    border: 5px solid #ffa62e;
+}
+
+.buttons{
+    margin: 10px;
+}
+
+.record {
+    background-color: #D5150B;
+}
+
+.play {
+    background-color: #256D1B;
+}
+
+.play-all {
+    background-color: #ffa62e;
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 8px 6px -6px #14213d;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+button:active {
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 6px -6px #14213d;
+    transform: translateY(4px);
+}
