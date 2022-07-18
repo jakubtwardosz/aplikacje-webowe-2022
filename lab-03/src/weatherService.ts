@@ -1,4 +1,4 @@
-export class Weather {
+export class WeatherService {
 
     owApiKey = '51069f88456216e76d29bc1c50d8e00f';
 

@@ -1,7 +1,9 @@
 import * as _ from 'lodash';
-import { Weather } from './weather';
+import { WeatherService } from './weatherService';
+import { WeatherView } from './weatherView';
 
-const weather = new Weather();
+const weatherService = new WeatherService();
+const weatherView = new WeatherView();
 
 class Main {
   constructor() {
@@ -9,13 +11,9 @@ class Main {
     let button = document.getElementById('button');    
     button.addEventListener('click', () => {
       if(city.value){
-        console.log(weather.getWeather(city.value));
+        weatherView.displayWeather(weatherService.getWeather(city.value))
       }
-    });
-
-
-
-    
+    });    
   }
 }
 
