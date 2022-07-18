@@ -7,18 +7,17 @@ export class WeatherService {
         
     }
 
-    async getWeather(city: string): Promise<string> {
+    async getWeather(city: string): Promise<any> {
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.owApiKey}&units=metric`;
         const response = await fetch(url);
         const data = await response.json();        
         return data;
-        
+
     }
 
     saveData(city : string){
         if(this.cities.includes(city)) return;
         this.cities.push(city);
-        console.log(this.cities);
         localStorage.setItem('cities', JSON.stringify(this.cities));
     }
 

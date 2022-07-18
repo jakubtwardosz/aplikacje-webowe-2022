@@ -13,9 +13,9 @@ class Main {
     button.addEventListener('submit', (event) => {
       event.preventDefault();
       if (city.value) {
-        weatherService.getWeather(city.value).then((data: any) => {
+        weatherService.getWeather(city.value).then((data : any) => {
           if (data.cod == 200) {
-            weatherView.displayWeather();
+            weatherView.displayWeather(data);
             weatherService.saveData(city.value);
           }
           if (data.cod == 404)
