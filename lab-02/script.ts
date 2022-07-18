@@ -8,50 +8,52 @@ class App {
     snare: HTMLAudioElement;
     tink: HTMLAudioElement;
     tom: HTMLAudioElement;
-    channels: Array<Array<[number, string]>>; 
+    channels: Array<Array<[number, string]>> = []; 
     currentChannel : number = -1;
     key : string;
-    time : number;
+    time : number = 0;
     flag : boolean = false;
+    startTime : any;
+    endTime : any;
+    timeDiff : any;
 
     constructor() {
-        this.channels = [];   
 
-
-        document.addEventListener('keypress', (event : KeyboardEvent) => {
-                                 
+        document.addEventListener('keypress', (event : KeyboardEvent) => {                                
             this.key = event.key;
-            this.time = event.timeStamp;                        
-            this.record(this.key, this.time, this.currentChannel);                  
-            this.play(this.key);
-            console.log(this.channels);          
+            this.time = event.timeStamp;
+            if (this.flag == true) {
+                this.record(this.key, this.time, this.currentChannel);
+            }                 
+            this.play(this.key);       
         });
 
         for (let i = 0; i < 4; i++) {
             let playChannel = document.querySelector("#playChannel" + i);
             let recordChannel = document.querySelector("#recordChannel" + i);
-                          
 
-                recordChannel?.addEventListener('click', () => {
-                    //this.time = 0;
-                    this.currentChannel = i; 
-                    
-                    // Reset channels
-                    // if (this.channels[this.currentChannel]) {
-                    //     this.channels[this.currentChannel] = [];
-                    // } 
-                    
-                    recordChannel.textContent = "Stop recording channel " + i;
-                    
-                    this.flag = !this.flag;
+
+                recordChannel?.addEventListener('click', (event) => {
+                    this.flag = !this.flag;                   
+                    this.currentChannel = i;
+
+                    recordChannel.textContent = "Stop recording channel " + i;                    
+                    if(this.flag === true)
+                    {                        
+                        this.startTime= Number(event.timeStamp);
+                        console.log(this.startTime);
+                        
+                    }                    
                     if (this.flag === false){
+                        this.endTime = Number(event.timeStamp);
+                        this.timeDiff = this.endTime - this.startTime;                        
+                        console.log(this.endTime, this.timeDiff);
                         recordChannel.textContent = "Start recording channel " +i;
-                    }
+                    }                   
                 });
                 
                 playChannel?.addEventListener("click", () => {
                     this.currentChannel = i; 
-                    //this.time = 0; 
                     this.channels[i].forEach((sound) => {
                         setTimeout(() => this.play(sound[0]), Number(sound[1])); 
                     })
