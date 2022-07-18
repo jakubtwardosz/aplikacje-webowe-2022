@@ -1,12 +1,12 @@
 import * as _ from 'lodash';
+import { Weather } from './weather';
 
- function component() {
-   const element = document.createElement('div');
+const weather = new Weather();
 
-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-   console.log('Hello world'); 
+class Main {
+  constructor(){
+    console.log('index');
+  }
+}
 
-   return element;
- }
-
- document.body.appendChild(component());
+new Main();
