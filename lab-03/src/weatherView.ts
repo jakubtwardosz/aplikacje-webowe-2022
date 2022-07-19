@@ -14,8 +14,6 @@ export class WeatherView {
         let weather = data.weather[0].main;
         let icon;
 
-        console.log(data);
-
         let ul = document.createElement('ul');
         ul.id = 'cities';
         document.body.appendChild(ul);
