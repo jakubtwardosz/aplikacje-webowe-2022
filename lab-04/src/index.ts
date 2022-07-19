@@ -1,12 +1,22 @@
 import * as _ from 'lodash';
+import { FirebaseService } from './firebaseService';
 
- function component() {
-   const element = document.createElement('div');
+const firebaseService = new FirebaseService();
 
-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-   console.log('Hello world'); 
+class Main {
+  constructor() {
+    let title = document.getElementById('title') as HTMLInputElement;
+    let content = document.getElementById('content') as HTMLInputElement;
+    let color = document.getElementById('color') as HTMLInputElement;
+    let form = document.getElementById('form');
 
-   return element;
- }
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (title.value && content.value && color.value) {
+        console.log(title.value, content.value,color.value);
+      }
+    });
+  }
+}
 
- document.body.appendChild(component());
+new Main();
