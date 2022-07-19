@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import { FirebaseService } from './firebaseService';
+import { Note } from "./note";
 import { NoteService } from './noteService';
 
 const firebaseService = new FirebaseService();
@@ -17,6 +18,7 @@ class Main {
       if (!title.value || !content.value || !color.value) {
         return alert("Complete all fields in the form");
       }
+      noteService.addNote(new Note(title.value, content.value,color.value));
     });
   }
 }
