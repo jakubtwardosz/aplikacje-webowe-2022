@@ -1,0 +1,19 @@
+/* https://colorhunt.co/palette/2c3333395b64a5c9cae7f6f2 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #2C3333;
+    color: #E7F6F2;
+}
+
+#container {
+    margin: 0 auto;
+    max-width: 480px;
+    padding: 0 2rem;
+}
