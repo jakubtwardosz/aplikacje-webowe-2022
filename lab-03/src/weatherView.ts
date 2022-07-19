@@ -14,11 +14,12 @@ export class WeatherView {
         let weather = data.weather[0].main;
         let icon;
 
+        let container = document.getElementById('container');
         let ul = document.createElement('ul');
         ul.id = 'cities';
-        document.body.appendChild(ul);
+        container.appendChild(ul);
 
-        if (document.body.contains(document.getElementById('cities'))) {
+        if (container.contains(document.getElementById('cities'))) {
             let li = document.createElement('li');
             li.className = city;
             ul.appendChild(li);
