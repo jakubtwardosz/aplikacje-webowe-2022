@@ -13,6 +13,8 @@ class Main {
     let color = document.getElementById('color') as HTMLInputElement;
     let form = document.getElementById('form');
 
+    noteService.getNotes();
+    
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       if (!title.value || !content.value || !color.value) {

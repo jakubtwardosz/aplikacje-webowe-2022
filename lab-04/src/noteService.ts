@@ -16,4 +16,8 @@ export class NoteService {
         localStorage.setItem('notes', JSON.stringify(this.notes));
         firebaseService.addNote(note); 
     }
+
+    getNotes(){
+        firebaseService.getNotes();
+    }
 }
