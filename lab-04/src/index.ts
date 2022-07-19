@@ -12,8 +12,8 @@ class Main {
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (title.value && content.value && color.value) {
-        console.log(title.value, content.value,color.value);
+      if (!title.value || !content.value || !color.value) {
+        return alert("Complete all fields in the form");
       }
     });
   }
