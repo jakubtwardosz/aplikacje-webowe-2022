@@ -1,7 +1,9 @@
 import * as _ from 'lodash';
 import { FirebaseService } from './firebaseService';
+import { NoteService } from './noteService';
 
 const firebaseService = new FirebaseService();
+const noteService = new NoteService();
 
 class Main {
   constructor() {
