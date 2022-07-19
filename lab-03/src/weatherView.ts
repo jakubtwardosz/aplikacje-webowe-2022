@@ -42,20 +42,43 @@ export class WeatherView {
             } else {
                 icon = data.weather[0].icon;
                 li.className = 'atmosphere';
-            }             
+            }
 
             li.innerHTML = `
-                <p>${city}</p>
-                <img src="http://openweathermap.org/img/wn/${icon}@2x.png" width="50px" height="50px" alt="">
-                <p>${description}</p>
-                <p>${feels_like}&deg;</p>
-                <p>${humidity}%</p>
-                <p>${pressure}hPa</p>
-                <p>${temp}&deg;</p>
-                <p>${temp_max}&deg;</p>
-                <p>${temp_min}&deg;</p>
-                <p>${weather}</p>
+                <h2>${city}</h2>
+                <div id="icon">
+                    <img src="http://openweathermap.org/img/wn/${icon}@2x.png" width="100px" height="100px" alt="${weather}">
+                    <span>${description}</span>
+                </div>
+                <table>
+                    <tr>
+                        <td>Feels like:</td>
+                        <td>${feels_like}&deg;</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity:</td>
+                        <td>${humidity}%</td>
+                    </tr>
+                    <tr>
+                        <td>Pressure:</td>
+                        <td>${pressure}hPa</td>
+                    </tr>
+                    <tr>
+                        <td>Temp:</td>
+                        <td>${temp}&deg;</td>
+                    </tr>
+                    <tr>
+                        <td>Temp max:</td>
+                        <td>${temp_max}&deg;</td>
+                    </tr>
+                    <tr>
+                        <td>Temp min:</td>
+                        <td>${temp_min}&deg;</td>
+                    </tr>
+                </table>
             `;
         }
     }
 }
+
+
