@@ -22,11 +22,11 @@ export class NoteService {
         firebaseService.addNote(note);
     }
 
-    deleteNote(id: String) {
-        console.log(id);
+    deleteNote(id: string) {
+        firebaseService.deleteNote(id);
     }
 
-    editNote(id: String) {
-        console.log(id);
+    editNote(id: string) {
+        firebaseService.editNote(id);
     }
 }

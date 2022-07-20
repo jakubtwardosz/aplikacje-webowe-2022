@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 import { firebaseConfig } from "./firebaseConfig";
 import { Note } from './note';
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, deleteDoc, doc, collection, getDocs } from "firebase/firestore";
 
 export class FirebaseService {
 
@@ -25,6 +25,14 @@ export class FirebaseService {
             let note = new Note(data.title, data.content, data.color, doc.id);
             note.create();
         });
+    }
+
+    async deleteNote(id : string){
+        await deleteDoc(doc(this.db, "notes", id));
+    }
+
+    async editNote(id: string) {
+        
     }
 
 }
