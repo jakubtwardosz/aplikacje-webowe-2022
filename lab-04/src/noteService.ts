@@ -1,32 +1,44 @@
-import { FirebaseService } from "./firebaseService";
+//import { FirebaseService } from "./firebaseService";
 import { Note } from "./note";
 
-const firebaseService = new FirebaseService();
+//const firebaseService = new FirebaseService();
 
 export class NoteService {
 
-    notes: Note[] = [];
+    allNotes: Note[];
     deleteButton: HTMLInputElement;
     editButton: HTMLInputElement;
+    
 
     constructor() {
 
     }
 
-    getNotes() {
-        firebaseService.getNotes();
+    getNotes() {        
+            return Object.keys(localStorage)
+                .filter((key) => key.startsWith('note-'))
+                .map((key) => JSON.parse(localStorage[key])).map((note: Note) => {
+                    new Note(note.title,note.content,note.color,note.id).create()
+                });
     }
 
     addNote(note: Note) {
-        this.notes.push(note);
-        firebaseService.addNote(note);
+        localStorage.setItem(`note-${note.id}`, JSON.stringify(note));
     }
 
     deleteNote(id: string) {
-        firebaseService.deleteNote(id);
+        localStorage.removeItem(`note-${id}`);
     }
 
     editNote(id: string) {
-        firebaseService.editNote(id);
+        localStorage.getItem(`note-${id}`);
+
+        let note = this.allNotes.find((note: Note) => String(note.id) === id);
+        console.log(note);
+        if (note) {
+            note.isEdited = true;
+            this.getNotes();
+        }
+     
     }
 }
