@@ -17,13 +17,14 @@ export class Note {
         let div = document.createElement('div');
         if (this.id) {
             div.id = this.id;
-        }        
+        }
+        div.className = 'note';
+        div.style.backgroundColor = this.color;        
         container.appendChild(div);
 
         div.innerHTML = `
             <h2>${this.title}</h2>
             <p>${this.content}</p>
-            <p>${this.color}</p>
         `;
 
     }
