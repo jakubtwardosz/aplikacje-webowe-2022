@@ -6,18 +6,27 @@ const firebaseService = new FirebaseService();
 export class NoteService {
 
     notes: Note[] = [];
+    deleteButton: HTMLInputElement;
+    editButton: HTMLInputElement;
 
     constructor() {
+
     }
 
-    addNote(note : Note){
-        this.notes.push(note);
-        console.log(this.notes);
-        localStorage.setItem('notes', JSON.stringify(this.notes));
-        firebaseService.addNote(note); 
-    }
-
-    getNotes(){
+    getNotes() {
         firebaseService.getNotes();
+    }
+
+    addNote(note: Note) {
+        this.notes.push(note);
+        firebaseService.addNote(note);
+    }
+
+    deleteNote(id: String) {
+        console.log(id);
+    }
+
+    editNote(id: String) {
+        console.log(id);
     }
 }

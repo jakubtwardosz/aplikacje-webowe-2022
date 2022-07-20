@@ -2,15 +2,12 @@ import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 import { firebaseConfig } from "./firebaseConfig";
 import { Note } from './note';
-import { doc, setDoc, getDoc, addDoc, collection, getDocs } from "firebase/firestore";
-
-
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 export class FirebaseService {
 
     app = initializeApp(firebaseConfig);
     db = getFirestore(this.app);
-
 
     // https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
     async addNote(note: Note) {
@@ -29,12 +26,5 @@ export class FirebaseService {
             note.create();
         });
     }
-
-
-
-
-
-
-
 
 }

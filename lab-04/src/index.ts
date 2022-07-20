@@ -6,7 +6,6 @@ import { NoteService } from './noteService';
 const firebaseService = new FirebaseService();
 const noteService = new NoteService();
 
-
 class Main {
   constructor() {
     const re = /[0-9A-Fa-f]{6}/g;
@@ -26,8 +25,13 @@ class Main {
         return alert("Complete all fields in the form");
       }
       noteService.addNote(new Note(title.value, content.value,color.value));
-    });
+    });  
   }
+
 }
 
+
 new Main();
+
+(window as Window & typeof globalThis & { noteService: NoteService }).noteService = new NoteService();
+
