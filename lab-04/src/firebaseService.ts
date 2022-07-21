@@ -6,17 +6,25 @@ import { addDoc, deleteDoc, doc, collection, getDocs, getDoc, updateDoc, onSnaps
 
 export class FirebaseService {
 
+    note: Note;
     app = initializeApp(firebaseConfig);
     db = getFirestore(this.app);
 
-    // https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
-    async addNote(note: Note) {
+    async addNote() {
+        let title = document.getElementById('title') as HTMLInputElement;
+        let content = document.getElementById('content') as HTMLInputElement;
+        let color = document.getElementById('color') as HTMLInputElement;
+
+        this.note = new Note(title.value, content.value,color.value)
+
         await addDoc(collection(this.db, "notes"), {
-            title: note.title,
-            content: note.content,
-            color: note.color,
-            isEdited: note.isEdited
+            title: this.note.title,
+            content: this.note.content,
+            color: this.note.color,
+            isEdited: this.note.isEdited
         });
+
+        this.note.create();
     }
 
     async getNotes() {
