@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
-//import { FirebaseService } from './firebaseService';
+import { FirebaseService } from './firebaseService';
 import { Note } from "./note";
-import { NoteService } from './noteService';
+// import { NoteService } from './noteService';
 
-//const firebaseService = new FirebaseService();
-const noteService = new NoteService();
+const firebaseService = new FirebaseService();
+// const noteService = new NoteService();
 
 class Main {
   constructor() {
@@ -22,10 +22,12 @@ class Main {
       // if (!title.value || !content.value || !color.value) {
       //   return alert("Complete all fields in the form");
       // }
-      noteService.addNote(new Note(title.value, content.value,color.value, Date.now()));
+      firebaseService.addNote(new Note(title.value, content.value,color.value));
+      firebaseService.getNotes();
     });
 
-    noteService.getNotes();
+    firebaseService.getNotes();
+    // noteService.getNotes();
 
   }
 
@@ -34,5 +36,5 @@ class Main {
 
 new Main();
 
-(window as Window & typeof globalThis & { noteService: NoteService }).noteService = new NoteService();
+(window as Window & typeof globalThis & { firebaseService: FirebaseService }).firebaseService = new FirebaseService();
 

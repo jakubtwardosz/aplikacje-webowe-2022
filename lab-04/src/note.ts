@@ -4,10 +4,10 @@ export class Note {
     title: string;
     content: string;
     color: string;
-    id: number;
+    id?: string;
     isEdited = false;
 
-    constructor(title: string, content: string, color: string, id: number) {
+    constructor(title: string, content: string, color: string, id?: string) {
         this.title = title;
         this.content = content;
         this.color = color;
@@ -30,8 +30,8 @@ export class Note {
             div.innerHTML = `
                 <h2>${this.title}</h2>
                 <p>${this.content}</p>
-                <button onclick="noteService.deleteNote('${this.id}')" type="button">Delete</button>
-                <button onclick="noteService.editNote('${this.id}')" type="button">Edit</button>
+                <button type="button" onclick="firebaseService.deleteNote('${this.id}')" type="button">Delete</button>
+                <button type="button" onclick="firebaseService.editNote('${this.id}')" type="button">Edit</button>
             `;
         } else {
             div.innerHTML = `<form id="form">
