@@ -80,5 +80,14 @@ export class FirebaseService {
         updateForm.remove();
 
         let updateNote = document.getElementById(id) as HTMLDivElement;
+
+        updateNote.innerHTML = `
+                <h2>${title}</h2>
+                <p>${content}</p>
+                <button type="button" onclick="firebaseService.deleteNote('${id}')" type="button">Delete</button>
+                <button type="button" onclick="firebaseService.editNote('${id}')" type="button">Edit</button>
+            `;
+
+       
     } 
 }
