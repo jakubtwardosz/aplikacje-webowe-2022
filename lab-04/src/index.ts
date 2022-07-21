@@ -23,7 +23,7 @@ class Main {
       //   return alert("Complete all fields in the form");
       // }
       firebaseService.addNote(new Note(title.value, content.value,color.value));
-      firebaseService.getNotes();
+      
     });
 
     firebaseService.getNotes();

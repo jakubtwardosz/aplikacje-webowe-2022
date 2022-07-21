@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, QuerySnapshot } from "firebase/firestore"
 import { firebaseConfig } from "./firebaseConfig";
 import { Note } from './note';
 import { addDoc, deleteDoc, doc, collection, getDocs, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
@@ -17,7 +17,6 @@ export class FirebaseService {
             color: note.color,
             isEdited: note.isEdited
         });
-
     }
 
     async getNotes() {
@@ -41,7 +40,7 @@ export class FirebaseService {
         let updateNote = document.getElementById(id) as HTMLDivElement;
 
         updateNote.innerHTML += `
-            <form id="updateForm">
+            <form id="updateForm-${id}">
                 <label for="title">Title:</label>
                 <input type="text" id="updateTitle" name="title">
                 <label for="content">Content:</label>
@@ -51,7 +50,7 @@ export class FirebaseService {
                 <input type="submit" value="Update">
             </form>
         `;
-        let updateForm = document.getElementById('updateForm');
+        let updateForm = document.getElementById(`updateForm-${id}`);
         let updateTitle = document.getElementById('updateTitle') as HTMLInputElement;
         let updateContent = document.getElementById('updateContent') as HTMLInputElement;
         let updateColor = document.getElementById('updateColor') as HTMLInputElement;    
@@ -60,8 +59,6 @@ export class FirebaseService {
             event.preventDefault();
             this.updateNote(updateTitle.value, updateContent.value,updateColor.value, id);
         });
-
-        
     }
 
     async updateNote(title: string, content: string, color: string, id : string){
@@ -70,17 +67,10 @@ export class FirebaseService {
             title: title,
             content: content,
             color: color
-        });
-        let updateNote = document.getElementById(id) as HTMLDivElement;        
-        let updateForm = updateNote.querySelector('updateForm');
+        });      
+        let updateForm = document.getElementById(`updateForm-`+id) as HTMLFormElement;
         updateForm.remove();
 
-        
-
-        console.log(title, content, color);
-    }
-
-   
-
- 
+        let updateNote = document.getElementById(id) as HTMLDivElement;
+    } 
 }
