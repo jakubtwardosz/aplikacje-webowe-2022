@@ -33,18 +33,6 @@ export class Note {
                 <button type="button" onclick="firebaseService.deleteNote('${this.id}')" type="button">Delete</button>
                 <button type="button" onclick="firebaseService.editNote('${this.id}')" type="button">Edit</button>
             `;
-        } else {
-            div.innerHTML = `<form id="form">
-                                <label for="title">Title:</label>
-                                <input type="text" id="title" name="title">
-                                <label for="content">Content:</label>
-                                <textarea id="content" name="content"></textarea>
-                                <label for="color">Color(HEX):</label>
-                                <input type="text" id="color" name="color">
-                                <input type="submit" value="Submit">
-                            </form>`;
-
-
         }
     }
 

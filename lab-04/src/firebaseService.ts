@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 import { firebaseConfig } from "./firebaseConfig";
 import { Note } from './note';
-import { addDoc, deleteDoc, doc, collection, getDocs } from "firebase/firestore";
+import { addDoc, deleteDoc, doc, collection, getDocs, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 
 export class FirebaseService {
 
@@ -34,11 +34,53 @@ export class FirebaseService {
         let note = document.getElementById(id);
         note.remove();       
     }
+    
 
     async editNote(id: string) {
 
+        let updateNote = document.getElementById(id) as HTMLDivElement;
+
+        updateNote.innerHTML += `
+            <form id="updateForm">
+                <label for="title">Title:</label>
+                <input type="text" id="updateTitle" name="title">
+                <label for="content">Content:</label>
+                <textarea id="updateContent" name="content"></textarea>
+                <label for="color">Color(HEX):</label>
+                <input type="text" id="updateColor" name="color">
+                <input type="submit" value="Update">
+            </form>
+        `;
+        let updateForm = document.getElementById('updateForm');
+        let updateTitle = document.getElementById('updateTitle') as HTMLInputElement;
+        let updateContent = document.getElementById('updateContent') as HTMLInputElement;
+        let updateColor = document.getElementById('updateColor') as HTMLInputElement;    
+
+        updateForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            this.updateNote(updateTitle.value, updateContent.value,updateColor.value, id);
+        });
 
         
     }
 
+    async updateNote(title: string, content: string, color: string, id : string){
+        const note = doc(this.db, "notes", id);
+        await updateDoc(note, {
+            title: title,
+            content: content,
+            color: color
+        });
+        let updateNote = document.getElementById(id) as HTMLDivElement;        
+        let updateForm = updateNote.querySelector('updateForm');
+        updateForm.remove();
+
+        
+
+        console.log(title, content, color);
+    }
+
+   
+
+ 
 }
