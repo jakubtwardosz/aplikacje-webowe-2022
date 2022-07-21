@@ -53,7 +53,7 @@ export class FirebaseService {
                 <input type="text" id="updateTitle" name="title">
                 <label for="content">Content:</label>
                 <textarea id="updateContent" name="content"></textarea>
-                <label for="color">Color(HEX):</label>
+                <label for="color">Color(AliceBlue, AntiqueWhite, BlanchedAlmond):</label>
                 <input type="text" id="updateColor" name="color">
                 <input type="submit" value="Update">
             </form>
@@ -80,7 +80,7 @@ export class FirebaseService {
         updateForm.remove();
 
         let updateNote = document.getElementById(id) as HTMLDivElement;
-
+        updateNote.style.backgroundColor = color;
         updateNote.innerHTML = `
                 <h2>${title}</h2>
                 <p>${content}</p>
